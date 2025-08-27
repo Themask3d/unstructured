@@ -7,6 +7,7 @@ class Source(Enum):
     OCR_TESSERACT = "ocr_tesseract"
     OCR_PADDLE = "ocr_paddle"
     OCR_GOOGLEVISION = "ocr_googlevision"
+    OCR_DOCTR = "ocr_doctr"
 
 
 class OCRMode(Enum):
@@ -30,6 +31,7 @@ OCR_AGENT_PADDLE_OLD = "paddle"
 
 OCR_AGENT_TESSERACT = "unstructured.partition.utils.ocr_models.tesseract_ocr.OCRAgentTesseract"
 OCR_AGENT_PADDLE = "unstructured.partition.utils.ocr_models.paddle_ocr.OCRAgentPaddle"
+OCR_AGENT_DOCTR = "unstructured.partition.utils.ocr_models.doctr_ocr.OCRAgentDocTR"
 OCR_AGENT_GOOGLEVISION = (
     "unstructured.partition.utils.ocr_models.google_vision_ocr.OCRAgentGoogleVision"
 )
@@ -38,7 +40,8 @@ OCR_AGENT_MODULES_WHITELIST = os.getenv(
     "OCR_AGENT_MODULES_WHITELIST",
     "unstructured.partition.utils.ocr_models.tesseract_ocr,"
     "unstructured.partition.utils.ocr_models.paddle_ocr,"
-    "unstructured.partition.utils.ocr_models.google_vision_ocr",
+    "unstructured.partition.utils.ocr_models.google_vision_ocr,"
+    "unstructured.partition.utils.ocr_models.doctr_ocr",
 ).split(",")
 
 UNSTRUCTURED_INCLUDE_DEBUG_METADATA = os.getenv("UNSTRUCTURED_INCLUDE_DEBUG_METADATA", False)
