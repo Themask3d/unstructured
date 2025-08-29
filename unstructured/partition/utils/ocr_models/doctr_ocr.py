@@ -42,6 +42,13 @@ class OCRAgentDocTR(OCRAgent):
             pretrained=True,
         ).to(device)
 
+        # NOTE(crag): We need to check if the device is cuda because torch.compile
+        # is not supported on CPU for all models.
+        if device.type == "cuda":
+            logger.info("Compiling doctr model components with torch.compile...")
+            predictor.det_predictor.model = torch.compile(predictor.det_predictor.model)
+            predictor.reco_predictor.model = torch.compile(predictor.reco_predictor.model)
+
         return predictor
 
     def get_text_from_image(self, image: PILImage.Image) -> str:
